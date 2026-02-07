@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Rinora 💖</title>
+
   <style>
     :root{
       --p1:#ffe6f1;
@@ -96,12 +97,43 @@
       opacity: .95;
     }
 
+    /* Music button */
+    .music-btn{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
+      border: 1px solid rgba(255,255,255,.7);
+      background: rgba(255,255,255,.65);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding: 12px 14px;
+      cursor: pointer;
+      box-shadow: 0 18px 45px rgba(0,0,0,.18);
+      font-weight: 700;
+      color: #7a1144;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .music-btn:active{ transform: scale(.98); }
+    .music-btn[disabled]{ opacity:.7; cursor:not-allowed; }
+
+    /* hide player */
+    #ytwrap{
+      position: fixed;
+      width: 1px; height: 1px;
+      left: -9999px; top: -9999px;
+      overflow: hidden;
+    }
+
     @media (max-width:480px){
       p{font-size:16px}
       .card{padding:30px 18px; border-radius:22px;}
     }
   </style>
 </head>
+
 <body>
 
   <!-- Zemra që bien -->
@@ -124,11 +156,101 @@
       Nëse dashnia do t’ishte kod,<br>
       ti do t’ishe funksioni kryesor i jetës tem.<br><br>
       Çdo ditë me ty është versioni ma i mirë i vetes sime.<br>
-      Jo bug, jo error - veç dashni e pastër. ❤️
+      Jo bug, jo error — veç dashni e pastër. ❤️
     </p>
 
-    <footer> Jetlir 💌</footer>
+    <footer>— Jetlir 💌</footer>
   </div>
+
+  <!-- 🎵 Music button -->
+  <button class="music-btn" id="musicBtn" type="button" disabled>
+    <span id="musicIcon">⏳</span>
+    <span id="musicLabel">Loading…</span>
+  </button>
+
+  <!-- Hidden YouTube player -->
+  <div id="ytwrap">
+    <div id="ytPlayer"></div>
+  </div>
+
+  <script>
+    // "Those Eyes" — YouTube Video ID
+    const YT_VIDEO_ID = "1dvrcqIQgI";
+
+    const btn = document.getElementById("musicBtn");
+    const label = document.getElementById("musicLabel");
+    const icon = document.getElementById("musicIcon");
+
+    let player = null;
+    let isPlaying = false;
+
+    function setState(state){
+      if(state === "loading"){
+        btn.disabled = true;
+        icon.textContent = "⏳";
+        label.textContent = "Loading…";
+      } else if(state === "ready"){
+        btn.disabled = false;
+        icon.textContent = "🎵";
+        label.textContent = "Play";
+      } else if(state === "playing"){
+        btn.disabled = false;
+        icon.textContent = "⏸️";
+        label.textContent = "Pause";
+      } else if(state === "paused"){
+        btn.disabled = false;
+        icon.textContent = "🎵";
+        label.textContent = "Play";
+      } else if(state === "blocked"){
+        btn.disabled = true;
+        icon.textContent = "⚠️";
+        label.textContent = "Video blocked";
+      }
+    }
+
+    setState("loading");
+
+    // Load YouTube Iframe API
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+
+    window.onYouTubeIframeAPIReady = function () {
+      player = new YT.Player("ytPlayer", {
+        videoId: YT_VIDEO_ID,
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          loop: 1,
+          playlist: YT_VIDEO_ID
+        },
+        events: {
+          onReady: () => setState("ready"),
+          onError: (e) => {
+            // 101/150 = owner e ka ndalu embed-in
+            console.log("YT error code:", e.data);
+            setState("blocked");
+          }
+        }
+      });
+    };
+
+    btn.addEventListener("click", () => {
+      if (!player) return;
+
+      if (!isPlaying) {
+        // ensure sound
+        try { player.unMute(); player.setVolume(80); } catch(e){}
+        player.playVideo();   // starts only after click ✅
+        isPlaying = true;
+        setState("playing");
+      } else {
+        player.pauseVideo();
+        isPlaying = false;
+        setState("paused");
+      }
+    });
+  </script>
 
 </body>
 </html>
