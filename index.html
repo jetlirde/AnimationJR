@@ -20,7 +20,7 @@
       margin:0;
       height:100vh;
       overflow:hidden;
-      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      font-family: "Segoe UI", system-ui, Arial, sans-serif;
       color: var(--text);
       background:
         radial-gradient(circle at 15% 20%, rgba(255,255,255,.75), transparent 35%),
@@ -32,121 +32,89 @@
       position:relative;
     }
 
-    /* falling hearts */
     .heart{
       position:absolute;
       top:-12vh;
-      font-size: 18px;
-      opacity:.95;
+      font-size:18px;
       animation: fall linear infinite;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.18));
       user-select:none;
       pointer-events:none;
     }
     @keyframes fall{
-      0%   { transform: translateY(-12vh) translateX(0) rotate(0deg); opacity:0; }
-      10%  { opacity:1; }
-      100% { transform: translateY(120vh) translateX(var(--drift)) rotate(360deg); opacity:0; }
+      from{ transform: translateY(-10vh); opacity:1; }
+      to{ transform: translateY(110vh); opacity:0; }
     }
 
     .card{
       width:min(720px, 92vw);
-      padding: 38px 28px;
+      padding: 36px 28px;
       border-radius: 26px;
       background: var(--glass);
       border: 1px solid var(--stroke);
       backdrop-filter: blur(14px);
       box-shadow: 0 25px 70px rgba(0,0,0,.18);
       text-align:center;
-      position:relative;
       z-index:2;
     }
 
     h1{
-      margin: 0;
+      margin:0;
       font-size: clamp(44px, 7vw, 78px);
-      letter-spacing: .5px;
-      color: #8b124f;
-      text-shadow: 0 10px 25px rgba(0,0,0,.12);
+      color:#8b124f;
     }
 
     .big-heart{
-      font-size: 56px;
-      margin: 14px 0 8px;
+      font-size:56px;
+      margin:12px 0;
       animation: beat 1.2s infinite;
-      display:inline-block;
-      filter: drop-shadow(0 12px 18px rgba(0,0,0,.12));
     }
     @keyframes beat{
-      0%,100%{ transform: scale(1); }
-      50%{ transform: scale(1.18); }
+      50%{ transform: scale(1.15); }
     }
 
     p{
-      margin: 14px auto 0;
-      max-width: 560px;
-      font-size: 18px;
-      line-height: 1.7;
-      color: #3b0a2a;
+      max-width:560px;
+      margin:0 auto;
+      font-size:18px;
+      line-height:1.7;
     }
 
     footer{
-      margin-top: 22px;
-      font-weight: 700;
-      color: #6f0f3f;
-      opacity: .95;
+      margin-top:18px;
+      font-weight:700;
+      color:#6f0f3f;
     }
 
-    /* Music button */
+    /* MUSIC BUTTON */
     .music-btn{
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 9999;
-      border: 1px solid rgba(255,255,255,.7);
-      background: rgba(255,255,255,.65);
-      backdrop-filter: blur(10px);
-      border-radius: 999px;
-      padding: 12px 14px;
-      cursor: pointer;
-      box-shadow: 0 18px 45px rgba(0,0,0,.18);
-      font-weight: 700;
-      color: #7a1144;
-      display:flex;
-      align-items:center;
-      gap:8px;
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:9999;
+      padding:14px 18px;
+      border-radius:999px;
+      background: rgba(255,255,255,.75);
+      border:1px solid rgba(255,255,255,.9);
+      font-weight:700;
+      color:#7a1144;
+      text-decoration:none;
+      box-shadow:0 18px 45px rgba(0,0,0,.18);
+      transition:.2s;
     }
-    .music-btn:active{ transform: scale(.98); }
-    .music-btn[disabled]{ opacity:.7; cursor:not-allowed; }
-
-    /* hide player */
-    #ytwrap{
-      position: fixed;
-      width: 1px; height: 1px;
-      left: -9999px; top: -9999px;
-      overflow: hidden;
-    }
-
-    @media (max-width:480px){
-      p{font-size:16px}
-      .card{padding:30px 18px; border-radius:22px;}
+    .music-btn:hover{
+      transform: scale(1.05);
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Zemra që bien -->
-  <div class="heart" style="left:5%;  animation-duration:9s;  --drift: 35px;">💗</div>
-  <div class="heart" style="left:12%; animation-duration:12s; --drift:-25px;">💖</div>
-  <div class="heart" style="left:22%; animation-duration:10s; --drift: 20px;">💘</div>
-  <div class="heart" style="left:30%; animation-duration:14s; --drift:-45px;">💞</div>
-  <div class="heart" style="left:40%; animation-duration:9.5s;--drift: 30px;">💓</div>
-  <div class="heart" style="left:50%; animation-duration:13s; --drift:-18px;">💖</div>
-  <div class="heart" style="left:60%; animation-duration:11s; --drift: 42px;">💗</div>
-  <div class="heart" style="left:70%; animation-duration:15s; --drift:-35px;">💘</div>
-  <div class="heart" style="left:80%; animation-duration:12.5s;--drift: 22px;">💞</div>
-  <div class="heart" style="left:90%; animation-duration:10.5s;--drift:-20px;">💓</div>
+  <!-- Falling hearts -->
+  <div class="heart" style="left:10%;animation-duration:9s">💗</div>
+  <div class="heart" style="left:30%;animation-duration:12s">💖</div>
+  <div class="heart" style="left:50%;animation-duration:10s">💞</div>
+  <div class="heart" style="left:70%;animation-duration:14s">💘</div>
+  <div class="heart" style="left:90%;animation-duration:11s">💓</div>
 
   <div class="card">
     <h1>Rinora</h1>
@@ -162,95 +130,12 @@
     <footer>— Jetlir 💌</footer>
   </div>
 
-  <!-- 🎵 Music button -->
-  <button class="music-btn" id="musicBtn" type="button" disabled>
-    <span id="musicIcon">⏳</span>
-    <span id="musicLabel">Loading…</span>
-  </button>
-
-  <!-- Hidden YouTube player -->
-  <div id="ytwrap">
-    <div id="ytPlayer"></div>
-  </div>
-
-  <script>
-    // "Those Eyes" — YouTube Video ID
-    const YT_VIDEO_ID = "1dvrcqIQgI";
-
-    const btn = document.getElementById("musicBtn");
-    const label = document.getElementById("musicLabel");
-    const icon = document.getElementById("musicIcon");
-
-    let player = null;
-    let isPlaying = false;
-
-    function setState(state){
-      if(state === "loading"){
-        btn.disabled = true;
-        icon.textContent = "⏳";
-        label.textContent = "Loading…";
-      } else if(state === "ready"){
-        btn.disabled = false;
-        icon.textContent = "🎵";
-        label.textContent = "Play";
-      } else if(state === "playing"){
-        btn.disabled = false;
-        icon.textContent = "⏸️";
-        label.textContent = "Pause";
-      } else if(state === "paused"){
-        btn.disabled = false;
-        icon.textContent = "🎵";
-        label.textContent = "Play";
-      } else if(state === "blocked"){
-        btn.disabled = true;
-        icon.textContent = "⚠️";
-        label.textContent = "Video blocked";
-      }
-    }
-
-    setState("loading");
-
-    // Load YouTube Iframe API
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(tag);
-
-    window.onYouTubeIframeAPIReady = function () {
-      player = new YT.Player("ytPlayer", {
-        videoId: YT_VIDEO_ID,
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          loop: 1,
-          playlist: YT_VIDEO_ID
-        },
-        events: {
-          onReady: () => setState("ready"),
-          onError: (e) => {
-            // 101/150 = owner e ka ndalu embed-in
-            console.log("YT error code:", e.data);
-            setState("blocked");
-          }
-        }
-      });
-    };
-
-    btn.addEventListener("click", () => {
-      if (!player) return;
-
-      if (!isPlaying) {
-        // ensure sound
-        try { player.unMute(); player.setVolume(80); } catch(e){}
-        player.playVideo();   // starts only after click ✅
-        isPlaying = true;
-        setState("playing");
-      } else {
-        player.pauseVideo();
-        isPlaying = false;
-        setState("paused");
-      }
-    });
-  </script>
+  <!-- 🎵 MUSIC LINK (Those Eyes) -->
+  <a class="music-btn"
+     href="https://www.youtube.com/watch?v=1dvrcqIQgI"
+     target="_blank">
+     🎵 Those Eyes
+  </a>
 
 </body>
 </html>
