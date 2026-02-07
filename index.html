@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rinora 💖</title>
+  <style>
+    :root{
+      --p1:#ffe6f1;
+      --p2:#ffd1e6;
+      --p3:#ffc2dd;
+      --glass: rgba(255,255,255,.55);
+      --stroke: rgba(255,255,255,.65);
+      --text:#3b0a2a;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      height:100vh;
+      overflow:hidden;
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.75), transparent 35%),
+        radial-gradient(circle at 85% 25%, rgba(255,255,255,.55), transparent 40%),
+        linear-gradient(135deg,var(--p1),var(--p2),var(--p3));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    /* falling hearts */
+    .heart{
+      position:absolute;
+      top:-12vh;
+      font-size: 18px;
+      opacity:.95;
+      animation: fall linear infinite;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.18));
+      user-select:none;
+      pointer-events:none;
+    }
+    @keyframes fall{
+      0%   { transform: translateY(-12vh) translateX(0) rotate(0deg); opacity:0; }
+      10%  { opacity:1; }
+      100% { transform: translateY(120vh) translateX(var(--drift)) rotate(360deg); opacity:0; }
+    }
+
+    .card{
+      width:min(720px, 92vw);
+      padding: 38px 28px;
+      border-radius: 26px;
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 25px 70px rgba(0,0,0,.18);
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+
+    h1{
+      margin: 0;
+      font-size: clamp(44px, 7vw, 78px);
+      letter-spacing: .5px;
+      color: #8b124f;
+      text-shadow: 0 10px 25px rgba(0,0,0,.12);
+    }
+
+    .big-heart{
+      font-size: 56px;
+      margin: 14px 0 8px;
+      animation: beat 1.2s infinite;
+      display:inline-block;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,.12));
+    }
+    @keyframes beat{
+      0%,100%{ transform: scale(1); }
+      50%{ transform: scale(1.18); }
+    }
+
+    p{
+      margin: 14px auto 0;
+      max-width: 560px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #3b0a2a;
+    }
+
+    footer{
+      margin-top: 22px;
+      font-weight: 700;
+      color: #6f0f3f;
+      opacity: .95;
+    }
+
+    @media (max-width:480px){
+      p{font-size:16px}
+      .card{padding:30px 18px; border-radius:22px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Zemra që bien -->
+  <div class="heart" style="left:5%;  animation-duration:9s;  --drift: 35px;">💗</div>
+  <div class="heart" style="left:12%; animation-duration:12s; --drift:-25px;">💖</div>
+  <div class="heart" style="left:22%; animation-duration:10s; --drift: 20px;">💘</div>
+  <div class="heart" style="left:30%; animation-duration:14s; --drift:-45px;">💞</div>
+  <div class="heart" style="left:40%; animation-duration:9.5s;--drift: 30px;">💓</div>
+  <div class="heart" style="left:50%; animation-duration:13s; --drift:-18px;">💖</div>
+  <div class="heart" style="left:60%; animation-duration:11s; --drift: 42px;">💗</div>
+  <div class="heart" style="left:70%; animation-duration:15s; --drift:-35px;">💘</div>
+  <div class="heart" style="left:80%; animation-duration:12.5s;--drift: 22px;">💞</div>
+  <div class="heart" style="left:90%; animation-duration:10.5s;--drift:-20px;">💓</div>
+
+  <div class="card">
+    <h1>Rinora</h1>
+    <div class="big-heart">💖</div>
+
+    <p>
+      Nëse dashnia do t’ishte kod,<br>
+      ti do t’ishe funksioni kryesor i jetës tem.<br><br>
+      Çdo ditë me ty është versioni ma i mirë i vetes sime.<br>
+      Jo bug, jo error - veç dashni e pastër. ❤️
+    </p>
+
+    <footer> Jetlir 💌</footer>
+  </div>
+
+</body>
+</html>
